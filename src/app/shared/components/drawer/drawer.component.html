@@ -1,0 +1,20 @@
+<div class="sidenav" [ngClass]="{'sidenav-collapsed': collapsed}" >
+  <div class="sidenav__logo" [ngClass]="{'open': collapsed}">
+    <button class="sidenav__logo-btn" (click)="toggleCollapsed()">
+      <img src="/assets/images/sidenav/logo.svg" alt="logo">
+    </button>
+    <div class="sidenav__logo-text">Cryptochecker</div>
+  </div>
+  <ul class="sidenav__list" [ngClass]="{'open': collapsed}">
+    <li class="sidenav__item" *ngFor="let link of navData" >
+      <a routerLinkActive="active"
+         routerLink="{{link.routerLink}}"
+         [ngClass]="{'open': collapsed}"
+         class="sidenav__link"
+         >
+        <img src="{{link.icon}}" class="sidenav__link-icon">
+        <span  class="sidenav__link-text" >{{link.name}}</span>
+      </a>
+    </li>
+  </ul>
+</div>

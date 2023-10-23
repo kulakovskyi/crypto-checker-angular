@@ -22,7 +22,6 @@ export class DrawerComponent implements OnInit{
     this.screenWidth = window.innerWidth;
   }
 
-
   toggleCollapsed() {
     this.collapsed = !this.collapsed
     const emitter: SideNavToggleInterface = {

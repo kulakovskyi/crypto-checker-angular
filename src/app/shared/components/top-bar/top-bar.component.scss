@@ -1,0 +1,14 @@
+.top-bar{
+  padding: 25px 30px;
+  &__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__title{
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+}

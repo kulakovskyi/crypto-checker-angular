@@ -1,0 +1,63 @@
+.chart-min{
+  max-width: 1100px;
+  margin-top: 30px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 15px;
+  background: #1B2028;
+  box-shadow: 4px 4px 33px 0px rgba(0, 0, 0, 0.05);
+  &__title{
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0 0 20px;
+  }
+  &__name{
+    color: #a6a3a3;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0 0 10px;
+  }
+  &__canvas{
+    max-width: 1100px;
+    width: 100%;
+
+  }
+  &__wrapper{
+    display: flex;
+    gap: 30px;
+  }
+  &__buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  &__btn{
+    white-space: nowrap;
+    background: transparent;
+    color:  #9E9E9E;
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px;
+    padding: 0px 15px;
+    border-radius: 15px;
+    border: 1px solid  #31353F;
+    transition: color .3s ease, border .3s ease, color .3s ease;
+    &:hover{
+      background: #3A6FF8;
+      border: 1px solid  #3A6FF8;
+      color: #FFFFFF;
+    }
+    &._active{
+      background: #3A6FF8;
+      border: 1px solid  #3A6FF8;
+      color: #FFFFFF;
+    }
+  }
+
+}

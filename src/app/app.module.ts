@@ -5,6 +5,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DrawerComponent } from './shared/components/drawer/drawer.component';
 import {BodyComponent} from "./shared/components/body/body.component";
+import { TopBarComponent } from './shared/components/top-bar/top-bar.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import {HttpClientModule} from "@angular/common/http";
 
 
 
@@ -13,11 +17,16 @@ import {BodyComponent} from "./shared/components/body/body.component";
     AppComponent,
     DrawerComponent,
     BodyComponent,
+    TopBarComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

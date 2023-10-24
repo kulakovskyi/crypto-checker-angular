@@ -1,11 +1,12 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {ChartComponent} from "./components/chart.component";
 import {RouterModule} from "@angular/router";
+import {ChartComponent} from "./components/chart/chart.component";
 
 @NgModule({
   declarations:[
-    ChartComponent
+    ChartComponent,
+
   ],
   imports:[
     CommonModule,

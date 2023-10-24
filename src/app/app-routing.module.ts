@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import {ChartComponent} from "./pages/chart/components/chart.component";
+import {ChartComponent} from "./pages/chart/components/chart/chart.component";
 
 const routes: Routes = [
   {path:'', redirectTo: 'home', pathMatch: 'full'},

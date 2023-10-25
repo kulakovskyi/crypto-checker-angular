@@ -1,0 +1,49 @@
+<div class="chart-all">
+  <div class="chart-all__row">
+    <div class="chart-all__info">
+      <img class="chart-all__image" src="{{selectCurrencyObject?.image}}" alt="image">
+      <div class="chart-all__wrap">
+        <div class="chart-all__title">
+          {{selectCurrencyObject?.id | titlecase}}
+          /{{selectCurrencyObject?.symbol | uppercase}}</div>
+        <div
+          class="chart-all__price">{{selectCurrencyObject?.current_price | currency: currency :'symbol-narrow':'1.2-2'}}</div>
+      </div>
+    </div>
+    <form [formGroup]="formGroup">
+      <mat-form-field>
+        <mat-select
+          [panelClass]="'my-select-panel-class'"
+          (valueChange)="sendCurrency($event)"
+          formControlName="selectCurrency"
+          class="custom-select">
+          <mat-option
+            *ngFor="let currency of currencyAll"
+            value="{{currency.id}}">
+            <div class="select">
+              <img [src]="currency.image" alt="{{currency.id}}">
+              <span>{{currency.name}}/{{currency.symbol}}</span>
+            </div>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+
+  </div>
+  <div class="chart-all__wrapper">
+    <div class="chart-all__canvas">
+      <canvas class="chart-all__canvas" style="height: auto"
+              baseChart [data]="lineChartData"
+              [options]="lineChartOptions"
+              [type]="lineChartType"></canvas>
+    </div>
+
+    <div class="chart-all__buttons">
+      <button (click)="getGraphData(1)" [class._active]="days === 1" class="chart-all__btn">24 hours</button>
+      <button (click)="getGraphData(30)" [class._active]="days === 30" class="chart-all__btn">30 days</button>
+      <button (click)="getGraphData(90)" [class._active]="days === 90" class="chart-all__btn">90 days</button>
+      <button (click)="getGraphData(365)" [class._active]="days === 365" class="chart-all__btn _active">1 year</button>
+    </div>
+  </div>
+
+</div>

@@ -2,18 +2,26 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ChartConfiguration, ChartType} from "chart.js";
 import {BaseChartDirective} from "ng2-charts";
 import {ApiService} from "../../../../shared/services/api.service";
-import {DataIdService} from "../../services/data-id.service";
 import {CurrencyService} from "../../../../shared/services/currency.service";
+import {CurrencyResponseInterface} from "../../../../shared/interface/currency-response.interface";
+import {FormControl, FormGroup} from "@angular/forms";
 import {ChartService} from "../../../../shared/services/chart.service";
+import {DataIdService} from "../../../home/services/data-id.service";
+
+
 
 @Component({
-  selector: 'app-chart-min',
-  templateUrl: './chart-min.component.html',
-  styleUrls: ['./chart-min.component.scss']
+  selector: 'app-chart-all',
+  templateUrl: './chart-all.component.html',
+  styleUrls: ['./chart-all.component.scss']
 })
-export class ChartMinComponent implements OnInit{
+export class ChartAllComponent implements OnInit{
 
+  currencyAll!: CurrencyResponseInterface[]
+  selectCurrencyObject!: CurrencyResponseInterface | undefined
+  formGroup!: FormGroup
   currency : string = "USD"
+
   days : number = 365;
   selectedCoinId = 'bitcoin';
   selectedCoinSymbol = 'BTC'
@@ -48,31 +56,58 @@ export class ChartMinComponent implements OnInit{
   public lineChartType: ChartType = 'line';
   @ViewChild(BaseChartDirective) myLineChart !: BaseChartDirective;
 
-
   constructor(private apiService: ApiService,
-              private dataIdService: DataIdService,
               private currencyService: CurrencyService,
-              private chartService: ChartService) {
-
+              private chartService: ChartService,
+              private dataIdService: DataIdService) {
   }
 
   ngOnInit() {
+    this.getAllData()
+    this.initialSelect()
     this.getGraphData(this.days)
+  }
+
+  getAllData(){
+    this.apiService.getCurrency(this.currency).subscribe(res => {
+      this.currencyAll = res
+      this.selectCurrencyObject = res[0]
+    })
+  }
+
+  initialSelect(){
+    this.formGroup = new FormGroup({
+      selectCurrency: new FormControl('bitcoin')
+    });
+  }
+
+  sendCurrency(event: string) {
+    this.selectedCoinId = event
+    this.selectCurrencyObject = this.findObjectById(event)
+    this.currencyService.getCurrency().subscribe(val => {
+      this.currency = val
+      this.apiService.getGrpahicalCurrencyData(event,val,this.days)
+        .subscribe(res=>{
+          this.chartService.updateChart(this.myLineChart.chart, this.lineChartData, res, this.days);
+        })
+    });
   }
 
   getGraphData(days:number){
     this.dataIdService.selectedCoinId$.subscribe(({symbol, id}) => {
       this.currencyService.getCurrency().subscribe(val => {
-        this.selectedCoinId = id;
-        this.selectedCoinSymbol = symbol
+        this.days = days
         this.currency = val
         this.apiService.getGrpahicalCurrencyData(id,val,days)
           .subscribe(res=>{
             this.chartService.updateChart(this.myLineChart.chart, this.lineChartData, res, this.days);
           })
       });
-      })
+    })
+  }
 
+  findObjectById(targetId: string) {
+    return this.currencyAll.find(item => item.id === targetId);
   }
 
 }

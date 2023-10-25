@@ -13,7 +13,7 @@ export class ApiService{
   constructor(private http: HttpClient) {
   }
 
-  getCurrency(currency:string): Observable<CurrencyResponseInterface[]>{
+  getCurrency(currency:string = 'USD'): Observable<CurrencyResponseInterface[]>{
     return this.http.get<CurrencyResponseInterface[]>(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&sparkline=false`);
   }
 

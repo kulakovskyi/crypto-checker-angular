@@ -1,0 +1,24 @@
+<div class="exchange">
+  <div class="exchange__title">Exchange</div>
+  <div
+    *ngIf="exchanges$ | async as exchanges"
+    class="exchange__list">
+    <div class="exchange__head">
+      <div class="exchange__head-item">Name</div>
+      <div class="exchange__head-item">Country</div>
+      <div class="exchange__head-item">24h Volume</div>
+      <div class="exchange__head-item">Link</div>
+    </div>
+    <div
+      *ngFor="let exchange of exchanges"
+      class="exchange__item">
+      <div class="exchange__item-title">
+        <img src="{{exchange.image}}" alt="{{exchange.id}}">
+        <span>{{exchange.name}}</span>
+      </div>
+      <div class="exchange__item-country">{{exchange.country}}</div>
+      <div class="exchange__item-volume">${{exchange.trade_volume_24h_btc | number: '1.0-0' }}</div>
+      <a href="{{exchange.url}}" target="_blank" class="exchange__item-link">Visit</a>
+    </div>
+  </div>
+</div>

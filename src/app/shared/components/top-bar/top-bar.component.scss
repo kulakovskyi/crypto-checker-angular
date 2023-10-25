@@ -12,3 +12,40 @@
     line-height: normal;
   }
 }
+
+.my-select-panel-class {
+  background-color: #1B2028 !important;
+  color: #FFFFFF !important;
+
+
+  .mat-mdc-option{
+    color: #FFFFFF ;
+  }
+
+  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text{
+    color: #3A6FF8;
+  }
+
+}
+
+.mat-mdc-select{
+  color: #FFFFFF !important;
+}
+
+.mat-mdc-select-arrow{
+  color: #FFFFFF !important;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after{
+  color: #3A6FF8;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled){
+  background-color: #1B2028 !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+  border-bottom-color: #3A6FF8 !important;
+}
+
+

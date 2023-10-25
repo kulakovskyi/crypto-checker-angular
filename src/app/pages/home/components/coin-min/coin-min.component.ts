@@ -3,6 +3,7 @@ import {ApiService} from "../../../../shared/services/api.service";
 import {map, Observable} from "rxjs";
 import {CurrencyResponseInterface} from "../../../../shared/interface/currency-response.interface";
 import {DataIdService} from "../../services/data-id.service";
+import {CurrencyService} from "../../../../shared/services/currency.service";
 
 
 @Component({
@@ -14,14 +15,19 @@ export class CoinMinComponent implements OnInit{
 
   activeCoinId: string = 'bitcoin'
   currency : string = "USD"
-  currency$!: Observable<CurrencyResponseInterface[]>
+  currencyAll!: CurrencyResponseInterface[]
 
   constructor(private apiService: ApiService,
-              private dataIdService: DataIdService) {
+              private dataIdService: DataIdService,
+              private currencyService: CurrencyService) {
   }
 
   ngOnInit() {
     this.getAllData()
+    this.currencyService.getCurrency().subscribe(val => {
+      this.currency = val
+      this.getAllData()
+    })
   }
 
   selectCoin(id: string, symbol: string) {
@@ -30,9 +36,11 @@ export class CoinMinComponent implements OnInit{
   }
 
   getAllData(){
-    this.currency$ = this.apiService.getCurrency(this.currency).pipe(
+    this.apiService.getCurrency(this.currency).pipe(
       map(data => data.slice(0, 4))
-    );
+    ).subscribe(res => {
+      this.currencyAll = res
+    });
 
   }
 

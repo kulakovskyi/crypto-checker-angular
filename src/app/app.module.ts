@@ -9,6 +9,7 @@ import { TopBarComponent } from './shared/components/top-bar/top-bar.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -27,6 +28,7 @@ import {HttpClientModule} from "@angular/common/http";
     MatFormFieldModule,
     MatSelectModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

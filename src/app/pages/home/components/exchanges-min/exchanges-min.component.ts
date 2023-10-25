@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../../../shared/services/api.service";
 import {map, Observable} from "rxjs";
 import {ExchangeResponseInterface} from "../../../../shared/interface/exchange-response.interface";
+import {CurrencyService} from "../../../../shared/services/currency.service";
 
 @Component({
   selector: 'app-exchanges-min',
@@ -17,9 +18,6 @@ export class ExchangesMinComponent implements OnInit{
 
   ngOnInit() {
     this.getAllExchange()
-    this.apiService.getExchange().subscribe(res => {
-      console.log(res)
-    })
   }
 
   getAllExchange(){

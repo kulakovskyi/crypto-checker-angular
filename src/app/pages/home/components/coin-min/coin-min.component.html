@@ -1,7 +1,7 @@
-<div class="coin" *ngIf="currency$ | async as currency">
+<div class="coin" >
   <div class="coin__list">
     <div
-      *ngFor="let coin of currency"
+      *ngFor="let coin of currencyAll"
       (click)="selectCoin(coin.id, coin.symbol)"
       [class._active]="coin.id === activeCoinId"
       class="coin__item">
@@ -19,7 +19,7 @@
       </div>
       <div class="coin__item-row2">
         <div class="coin__item-info2">
-          <div class="coin__item-price">${{coin.current_price}}</div>
+          <div class="coin__item-price">{{coin.current_price | currency: currency :'symbol-narrow':'1.2-2'}}</div>
           <div
             [class.green]="coin.price_change_percentage_24h >= 0"
             [class.red]="coin.price_change_percentage_24h < 0"

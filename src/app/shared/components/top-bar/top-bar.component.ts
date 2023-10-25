@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
+import {CurrencyService} from "../../services/currency.service";
 
 @Component({
   selector: 'app-top-bar',
@@ -8,4 +9,12 @@ import {Component, ViewEncapsulation} from '@angular/core';
 })
 export class TopBarComponent {
 
+  selectedCurrency : string = "USD";
+
+  constructor(private currencyService: CurrencyService) {
+  }
+
+  sendCurrency(event: string) {
+      this.currencyService.setCurrency(event)
+  }
 }

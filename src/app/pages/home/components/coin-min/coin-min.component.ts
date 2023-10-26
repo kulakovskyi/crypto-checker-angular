@@ -23,7 +23,6 @@ export class CoinMinComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.getAllData()
     this.currencyService.getCurrency().subscribe(val => {
       this.currency = val
       this.getAllData()

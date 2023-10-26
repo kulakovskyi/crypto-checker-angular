@@ -5,6 +5,17 @@ import {ApiService} from "../../../../shared/services/api.service";
 import {DataIdService} from "../../services/data-id.service";
 import {CurrencyService} from "../../../../shared/services/currency.service";
 import {ChartService} from "../../../../shared/services/chart.service";
+import {
+  combineLatest,
+  combineLatestAll,
+  concatMap,
+  concatWith,
+  mergeWith,
+  of,
+  Subscription,
+  switchMap,
+  tap
+} from "rxjs";
 
 @Component({
   selector: 'app-chart-min',
@@ -16,7 +27,8 @@ export class ChartMinComponent implements OnInit{
   currency : string = "USD"
   days : number = 365;
   selectedCoinId = 'bitcoin';
-  selectedCoinSymbol = 'BTC'
+  selectedCoinSymbol = 'BTC';
+  private sub$!: Subscription;
 
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
@@ -57,20 +69,27 @@ export class ChartMinComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.getGraphData(this.days)
+    this.getGraphData(this.days);
   }
 
   getGraphData(days:number){
-    this.dataIdService.selectedCoinId$.subscribe(({symbol, id}) => {
-      this.currencyService.getCurrency().subscribe(val => {
-        this.selectedCoinId = id;
-        this.selectedCoinSymbol = symbol
-        this.currency = val
-        this.apiService.getGrpahicalCurrencyData(id,val,days)
-          .subscribe(res=>{
-            this.chartService.updateChart(this.myLineChart.chart, this.lineChartData, res, this.days);
-          })
-      });
+    this.sub$ && this.sub$.unsubscribe();
+    this.sub$ = combineLatest(
+      [this.dataIdService.selectedCoinId$,
+        this.currencyService.getCurrency()
+      ]
+    )
+      .pipe(
+        tap(([res, currency]) => {
+          this.currency = currency;
+          this.selectedCoinId = res.id;
+          this.selectedCoinSymbol = res.symbol;
+          this.days = days
+        }),
+        switchMap(() => this.apiService.getGrpahicalCurrencyData(this.selectedCoinId,this.currency,days))
+      )
+      .subscribe(res=>{
+        this.chartService.updateChart(this.myLineChart.chart, this.lineChartData, res, this.days);
       })
 
   }

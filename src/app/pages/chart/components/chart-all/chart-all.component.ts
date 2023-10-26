@@ -7,6 +7,7 @@ import {CurrencyResponseInterface} from "../../../../shared/interface/currency-r
 import {FormControl, FormGroup} from "@angular/forms";
 import {ChartService} from "../../../../shared/services/chart.service";
 import {DataIdService} from "../../../home/services/data-id.service";
+import {combineLatest, Subscription, switchMap, take, tap} from "rxjs";
 
 
 
@@ -17,14 +18,17 @@ import {DataIdService} from "../../../home/services/data-id.service";
 })
 export class ChartAllComponent implements OnInit{
 
+  private currencyDataSubscription$!: Subscription;
+
   currencyAll!: CurrencyResponseInterface[]
   selectCurrencyObject!: CurrencyResponseInterface | undefined
   formGroup!: FormGroup
   currency : string = "USD"
+  sub$!: Subscription
 
   days : number = 365;
   selectedCoinId = 'bitcoin';
-  selectedCoinSymbol = 'BTC'
+  selectedCoinSymbol = 'BTC';
 
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
@@ -84,7 +88,9 @@ export class ChartAllComponent implements OnInit{
   sendCurrency(event: string) {
     this.selectedCoinId = event
     this.selectCurrencyObject = this.findObjectById(event)
-    this.currencyService.getCurrency().subscribe(val => {
+    this.currencyService.getCurrency()
+      .pipe(take(1))
+      .subscribe(val => {
       this.currency = val
       this.apiService.getGrpahicalCurrencyData(event,val,this.days)
         .subscribe(res=>{
@@ -94,16 +100,25 @@ export class ChartAllComponent implements OnInit{
   }
 
   getGraphData(days:number){
-    this.dataIdService.selectedCoinId$.subscribe(({symbol, id}) => {
-      this.currencyService.getCurrency().subscribe(val => {
-        this.days = days
-        this.currency = val
-        this.apiService.getGrpahicalCurrencyData(id,val,days)
-          .subscribe(res=>{
-            this.chartService.updateChart(this.myLineChart.chart, this.lineChartData, res, this.days);
-          })
-      });
-    })
+
+    this.sub$ && this.sub$.unsubscribe();
+    this.sub$ = combineLatest(
+      [this.dataIdService.selectedCoinId$,
+        this.currencyService.getCurrency()
+      ]
+    )
+      .pipe(
+        tap(([res, currency]) => {
+          this.currency = currency;
+          this.selectedCoinId = res.id;
+          this.selectedCoinSymbol = res.symbol;
+          this.days = days
+        }),
+        switchMap(() => this.apiService.getGrpahicalCurrencyData(this.selectedCoinId,this.currency,days))
+      )
+      .subscribe(res=>{
+        this.chartService.updateChart(this.myLineChart.chart, this.lineChartData, res, this.days);
+      })
   }
 
   findObjectById(targetId: string) {

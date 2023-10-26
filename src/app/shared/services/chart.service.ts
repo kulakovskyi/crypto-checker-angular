@@ -8,10 +8,13 @@ import {GraphicalCurrencyResponseInterface} from "../interface/graphical-currenc
 })
 
 export class ChartService{
+
   updateChart(chart: any, lineChartData: ChartConfiguration['data'], res: GraphicalCurrencyResponseInterface, days: number) {
+
     setTimeout(() => {
       chart?.update();
-    }, 200);
+    }, 200)
+
 
     lineChartData.datasets[0].data = res.prices.map((a: any) => {
       return a[1];

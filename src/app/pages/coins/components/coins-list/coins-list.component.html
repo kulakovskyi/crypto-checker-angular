@@ -1,0 +1,46 @@
+<div class="coin" >
+  <div class="coin__list">
+    <div
+      *ngFor="let coin of currencyAll | slice:(currentPage-1)*itemsPerPage:currentPage*itemsPerPage"
+      (click)="selectCoin(coin.id, coin.symbol)"
+      [routerLink]="['/coins', coin.id]"
+      class="coin__item">
+      <div class="coin__item-row">
+        <div class="coin__item-img">
+          <img src="{{coin.image}}" alt="{{coin.name}}">
+        </div>
+        <div class="coin__item-info">
+          <div class="coin__item-name">{{coin.name}}</div>
+          <div class="coin__item-value">{{coin.symbol | uppercase}}</div>
+        </div>
+        <div class="coin__item-name-top">
+          <img src="{{ (coin.price_change_percentage_24h > 0 ? '/assets/images/currency/arrow-up.svg' : '/assets/images/currency/arrow-down.svg') }}" alt="arrow">
+        </div>
+      </div>
+      <div class="coin__item-row2">
+        <div class="coin__item-info2">
+          <div class="coin__item-price">{{coin.current_price | currency: currency :'symbol-narrow':'1.2-2'}}</div>
+          <div
+            [class.green]="coin.price_change_percentage_24h >= 0"
+            [class.red]="coin.price_change_percentage_24h < 0"
+            class="coin__item-percent">{{ (coin.price_change_percentage_24h > 0 ? '+' : '') + (coin.price_change_percentage_24h | number:'1.2-2')  }}%</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="coin__pagination">
+      <button
+        class="coin__pagination-btn"
+        (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">Preview page</button>
+      <span class="coin__pagination-counter">Page {{ currentPage }}</span>
+      <button
+        class="coin__pagination-btn"
+        (click)="currentPage = currentPage + 1" [disabled]="(currentPage * itemsPerPage) >= currencyAll.length">Next page</button>
+    </div>
+
+
+
+  </div>
+</div>

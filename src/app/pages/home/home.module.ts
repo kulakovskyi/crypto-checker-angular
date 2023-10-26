@@ -18,7 +18,6 @@ import { ExchangesMinComponent } from './components/exchanges-min/exchanges-min.
   ],
   imports: [
     CommonModule,
-
     RouterModule.forChild([
       {path: '', component: HomeComponent}
     ]),

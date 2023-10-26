@@ -13,7 +13,7 @@
       *ngFor="let exchange of exchanges"
       class="exchange__item">
       <div class="exchange__item-title">
-        <img src="{{exchange.image}}" alt="{{exchange.id}}">
+        <img [src]="exchange.image" [alt]="exchange.id">
         <span>{{exchange.name}}</span>
       </div>
       <div class="exchange__item-country">{{exchange.country}}</div>

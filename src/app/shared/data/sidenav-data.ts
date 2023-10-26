@@ -10,5 +10,10 @@ export const SidenavData: SideNavDataInterface[] = [
     routerLink: 'chart',
     icon: '/assets/images/sidenav/elem2.svg',
     name: 'Chart'
+  },
+  {
+    routerLink: 'coins',
+    icon: '/assets/images/sidenav/elem3.svg',
+    name: 'Coins'
   }
 ]

@@ -1,0 +1,126 @@
+.coin{
+  padding: 30px;
+  background: #31353F;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  &__list{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  &__item{
+    cursor: pointer;
+    width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    background:  #1B2028;
+    box-shadow: 4px 4px 33px 0px rgba(0, 0, 0, 0.05);
+    border: 2px solid #1B2028;
+    transition: border .3s ease;
+    &._active{
+      border: 2px solid #3A6FF8;
+    }
+    &:hover{
+      border: 2px solid #3A6FF8;
+    }
+    &-row{
+      display: flex;
+      align-items: center;
+      margin: 0 0 20px;
+    }
+    &-img{
+      margin: 0 20px 0 0;
+      width: 44px;
+      height: 44px;
+      background: #31353F;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img{
+        max-width: 24px;
+      }
+    }
+    &-info{
+      flex: 1 1 auto;
+    }
+    &-name{
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      color: #FFFFFF;
+      margin: 0 0 5px;
+      &-top{
+        margin: 0 0 0 10px;
+      }
+    }
+    &-value{
+      flex: 1 1 auto;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    &-row2{
+      display: flex;
+      align-items: center;
+    }
+    &-price{
+      font-size: 21px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      letter-spacing: 0.42px;
+      margin: 0 0 12px;
+    }
+    &-percent{
+
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 22.452px;
+      letter-spacing: 0.28px;
+      &.green{
+        color: #1ECB4F;
+      }
+      &.red{
+        color: #F46D22;
+      }
+    }
+  }
+  &__pagination{
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    &-btn{
+      padding: 10px 20px;
+      border-radius: 6px;
+      color: #FFFFFF;
+      background:  #1B2028;
+      box-shadow: 4px 4px 33px 0px rgba(0, 0, 0, 0.05);
+      border: 2px solid #1B2028;
+      transition: border .3s ease;
+
+      &:hover{
+        border: 2px solid #3A6FF8;
+      }
+      &:disabled{
+        opacity: .5;
+      }
+
+    }
+    &-counter{
+      padding: 8px 20px;
+      border-radius: 6px;
+      color: #3A6FF8;
+      background:  #1B2028;
+      box-shadow: 4px 4px 33px 0px rgba(0, 0, 0, 0.05);
+      border: 2px solid #1B2028;
+    }
+  }
+}

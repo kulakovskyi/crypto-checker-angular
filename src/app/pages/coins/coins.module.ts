@@ -6,17 +6,19 @@ import { CoinItemComponent } from './components/coin-item/coin-item.component';
 import {DataIdService} from "../home/services/data-id.service";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatDialogModule} from "@angular/material/dialog";
+import {NgChartsModule} from "ng2-charts";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild([
-      {path: '', component: CoinsListComponent},
-      {path: ':id', component: CoinItemComponent}
-    ]),
-    MatPaginatorModule,
-    MatDialogModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild([
+            {path: '', component: CoinsListComponent},
+            {path: ':id', component: CoinItemComponent}
+        ]),
+        MatPaginatorModule,
+        MatDialogModule,
+        NgChartsModule
+    ],
   declarations: [
     CoinsListComponent,
     CoinItemComponent

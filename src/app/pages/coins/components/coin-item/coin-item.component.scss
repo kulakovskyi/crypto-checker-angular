@@ -1,0 +1,112 @@
+.currency-item{
+  padding: 30px;
+  background: #31353F;
+  &__row{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  &__link{
+    border-radius: 5px;
+    border: 2px solid #1B2028;
+    color: #E4E4E4;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 14px 40px;
+    transition: background-color 0.3s ease;
+    &:hover{
+      background: #23252a;
+    }
+  }
+}
+
+.chart-all{
+  &__wrapper{
+    padding: 30px;
+    border-radius: 15px;
+    background: #1B2028;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: .86fr .14fr;
+  }
+  &__buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  &__btn{
+    white-space: nowrap;
+    background: transparent;
+    color:  #9E9E9E;
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px;
+    padding: 0px 15px;
+    border-radius: 15px;
+    border: 1px solid  #31353F;
+    transition: color .3s ease, border .3s ease, color .3s ease;
+    &:hover{
+      background: #3A6FF8;
+      border: 1px solid  #3A6FF8;
+      color: #FFFFFF;
+    }
+    &._active{
+      background: #3A6FF8;
+      border: 1px solid  #3A6FF8;
+      color: #FFFFFF;
+    }
+  }
+}
+
+.card{
+  max-width: 700px;
+  padding: 30px;
+  border-radius: 15px;
+  background: #1B2028;
+  margin: 0 0 30px;
+  &__row{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 0 0 20px 0;
+  }
+  &__image{
+    width: 90px;
+    height: 90px;
+    background: #31353F;
+    border-radius: 10px;
+    padding: 15px;
+  }
+  &__name{
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.42px;
+  }
+  &__description{
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0 0 10px;
+  }
+  &__detail{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    &-item{
+      font-size: 19px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      letter-spacing: 1.2px;
+    }
+  }
+}

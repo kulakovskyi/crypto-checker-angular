@@ -10,6 +10,7 @@
       <a routerLinkActive="active"
          routerLink="{{link.routerLink}}"
          [ngClass]="{'open': collapsed}"
+         (click)="activeRoute(link.routerLink)"
          class="sidenav__link"
          >
         <img src="{{link.icon}}" class="sidenav__link-icon">

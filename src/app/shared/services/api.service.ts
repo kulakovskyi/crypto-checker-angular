@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {CurrencyResponseInterface} from "../interface/currency-response.interface";
 import {GraphicalCurrencyResponseInterface} from "../interface/graphical-currency-response.interface";
 import {ExchangeResponseInterface} from "../interface/exchange-response.interface";
+import {CurrencyIdResponseInterface} from "../interface/currency-id-response.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,10 @@ export class ApiService{
 
   getExchange() :Observable<ExchangeResponseInterface[]>{
     return this.http.get<ExchangeResponseInterface[]>(`https://api.coingecko.com/api/v3/exchanges`)
+  }
+
+  getCurrencyById(coinId:string): Observable<CurrencyIdResponseInterface>{
+    return this.http.get<CurrencyIdResponseInterface>(`https://api.coingecko.com/api/v3/coins/${coinId}`)
   }
 
 }

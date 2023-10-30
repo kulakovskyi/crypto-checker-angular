@@ -1,5 +1,6 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {CurrencyService} from "../../services/currency.service";
+import {TopTitleService} from "../../services/top-title.service";
 
 @Component({
   selector: 'app-top-bar',
@@ -7,14 +8,25 @@ import {CurrencyService} from "../../services/currency.service";
   styleUrls: ['./top-bar.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class TopBarComponent {
+export class TopBarComponent implements OnInit{
 
   selectedCurrency : string = "USD";
 
-  constructor(private currencyService: CurrencyService) {
+  title!: string
+
+  constructor(private currencyService: CurrencyService,
+              private topTitleService: TopTitleService) {
   }
 
   sendCurrency(event: string) {
       this.currencyService.setCurrency(event)
   }
+
+  ngOnInit() {
+    this.topTitleService.getTitle().subscribe(res => {
+      this.title = res
+    }
+    )
+  }
+
 }

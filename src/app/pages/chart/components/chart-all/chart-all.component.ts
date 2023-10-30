@@ -18,8 +18,6 @@ import {combineLatest, Subscription, switchMap, take, tap} from "rxjs";
 })
 export class ChartAllComponent implements OnInit{
 
-  private currencyDataSubscription$!: Subscription;
-
   currencyAll!: CurrencyResponseInterface[]
   selectCurrencyObject!: CurrencyResponseInterface | undefined
   formGroup!: FormGroup
